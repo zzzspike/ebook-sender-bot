@@ -78,3 +78,7 @@ zh-hans:
     已发送，请在kindle首页刷新并查看是否已经收到该文档
   sendFailed:
     发送失败！
+  adding:
+    添加到书库中...
+  added:
+    已添加到书库

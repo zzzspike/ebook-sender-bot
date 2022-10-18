@@ -79,7 +79,6 @@ def convert_book(i: str, file_ext=default_config('format'), o='') -> (bool, str)
     __run_command([ebook_convert, i, o])
     return os.path.exists(o), o
 
-
 def remove_html_tags(text):
     """Remove html tags from a string"""
     clean = re.compile('<.*?>')
@@ -105,3 +104,12 @@ def __run_command(command):
     )
     stdout_value, stderr_value = proc.communicate()
     return stdout_value.decode('utf-8'), stderr_value
+
+def add_book_to_lib(i: str, lib: str):
+    if not os.path.exists(i):
+        return False
+    calibredb = 'calibredb.exe' if is_windows() else 'calibredb'
+    __run_command([calibredb, 'add', i, '--library-path=' + lib, '--automerge=overwrite'])
+    return True
+
+

@@ -137,7 +137,14 @@ class TgBot:
             send_book_meta(document.get_book_meta())
             document.send_file_to_kindle()
             self.reply.send_msg(update, 'done')
-            document.copy_file_to_storage()
+
+            if default_config("add_to_lib") == 'true':
+                self.reply.send_msg(update, 'adding')
+                document.add_file_to_lib()
+                self.reply.send_msg(update, 'added')
+            else:
+                document.copy_file_to_storage()
+
 
         except NotifyException as e:
             if e.args is not None:

@@ -70,3 +70,7 @@ en-us:
     Done.You can check if this file can be found on your kindle!
   sendFailed:
     Sending failed!
+  adding:
+    Adding book to library...
+  added:
+    Book was added to library.

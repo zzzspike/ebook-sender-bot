@@ -11,7 +11,7 @@ from app.config.configs import smtp_config, default_config
 from app.tg_bot.errors import NotifyException
 from app.tg_bot.user import User
 from app.utils.smtp import send_to_kindle
-from app.utils.util import convert_book, get_book_meta
+from app.utils.util import convert_book, get_book_meta, add_book_to_lib
 
 
 class Document:
@@ -130,3 +130,12 @@ class Document:
                 os.makedirs(os.path.dirname(new_path))
             if not os.path.exists(new_path):
                 shutil.copy(self.new_file_path, new_path)
+
+    def add_file_to_lib(self):
+        add_book_to_lib(self.origin_file_path, default_config("lib_path"))
+        if os.path.isfile(self.origin_file_path):
+            os.remove(self.origin_file_path)
+        if os.path.isfile(self.new_file_path):
+            os.remove(self.new_file_path)
+        
+        
