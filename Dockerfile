@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM python:latest
 
 LABEL MAINTAINER="qcgzxw<qcgzxw.com@gmail.com>"
 ARG DEBIAN_FRONTEND=noninteractive
@@ -23,13 +23,13 @@ ENV SMTP_PASSWORD ''
 ## Telegram infomation
 ENV BOT_TOKEN ''
 ENV DEVELOPER_CHAT_ID ''
+## Add to library
+ENV ADD_TO_LIB false
+ENV LIB_PATH ''
 
 # Install Calibere And Python
-RUN \
-  apt-get update && \
-  apt-get install -y curl pkg-config tzdata wget iputils-ping git libfontconfig libgl1-mesa-glx python3 python3-pip python3-pyqt5.qtmultimedia libnss3 libopengl0 && \
-  pip3 install PyQtWebEngine && \
-  wget --no-check-certificate -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sh /dev/stdin
+RUN apt-get update && apt-get install -y curl wget git libegl1 libopengl0
+RUN wget --no-check-certificate -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sh /dev/stdin
 
 # Setup App
 WORKDIR /app

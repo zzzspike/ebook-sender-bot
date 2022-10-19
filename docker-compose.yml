@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ebook-sender-bot:
-    image: qcgzxw/ebook-sender-bot:latest
+    image: spikez/ebook-sender-bot:latest
     container_name: ebook-sender-bot
     restart: unless-stopped
     environment:
@@ -24,6 +24,8 @@ services:
       - SMTP_PASSWORD=
       - BOT_TOKEN=
       - DEVELOPER_CHAT_ID=
+      - ADD_TO_LIB=false
+      - LIBPATH=
     volumes:
       - ./ebooks/:/app/storage/
       - ./default.log:/app/default.log
