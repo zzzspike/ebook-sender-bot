@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:3
 
 LABEL MAINTAINER="qcgzxw<qcgzxw.com@gmail.com>"
 ARG DEBIAN_FRONTEND=noninteractive
@@ -27,9 +27,10 @@ ENV DEVELOPER_CHAT_ID ''
 ENV ADD_TO_LIB false
 ENV LIB_PATH ''
 
-# Install Calibere And Python
-RUN apt-get update && apt-get install -y curl wget git libegl1 libopengl0
-RUN wget --no-check-certificate -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sh /dev/stdin
+# Install Calibre 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends calibre \
+    && rm -rf /var/lib/apt/lists/*
 
 # Setup App
 WORKDIR /app
