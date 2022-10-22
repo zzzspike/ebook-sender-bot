@@ -24,8 +24,9 @@ ENV SMTP_PASSWORD ''
 ENV BOT_TOKEN ''
 ENV DEVELOPER_CHAT_ID ''
 ## Add to library
-ENV ADD_TO_LIB false
+ENV ADD_TO_LIB true
 ENV LIB_PATH ''
+ENV SEND_TO_KINDLE false
 
 # Install Calibre 
 RUN apt-get update \

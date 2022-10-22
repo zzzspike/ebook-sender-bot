@@ -131,12 +131,13 @@ class TgBot:
                     if book_meta[key] != 'Unknown' and len(book_meta[key]) < 4000:
                         reply_msg += f"<b>{key}:</b> <pre>{book_meta[key]}</pre>\r\n\r\n"
                 if reply_msg == "":
-                    reply_msg = "sending..."
+                    reply_msg = "handling..."
                 self.reply.send_text(update, reply_msg)
 
             send_book_meta(document.get_book_meta())
-            document.send_file_to_kindle()
-            self.reply.send_msg(update, 'done')
+            if default_config("send_to_kindle") == 'true':
+                document.send_file_to_kindle()
+                self.reply.send_msg(update, 'done')
 
             if default_config("add_to_lib") == 'true':
                 self.reply.send_msg(update, 'adding')
