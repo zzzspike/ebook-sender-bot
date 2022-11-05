@@ -1,6 +1,6 @@
-FROM python:3
+FROM ubuntu:latest
 
-LABEL MAINTAINER="qcgzxw<qcgzxw.com@gmail.com>"
+LABEL MAINTAINER="gangkun<molver16@gmail.com>"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Set Environment Variables
@@ -28,10 +28,17 @@ ENV ADD_TO_LIB true
 ENV LIB_PATH ''
 ENV SEND_TO_KINDLE false
 
-# Install Calibre 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends calibre \
-    && rm -rf /var/lib/apt/lists/*
+# Install Calibere And Python
+RUN \
+  apt-get update && \
+  apt-get install -y curl pkg-config tzdata wget iputils-ping git libfontconfig libgl1-mesa-glx python3 python3-pip python3-pyqt5.qtmultimedia libnss3 libopengl0 && \
+  pip3 install PyQtWebEngine && \
+  wget --no-check-certificate -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sh /dev/stdin && \
+  rm -rf \
+    /tmp/* \
+    /var/lib/apt/lists/* \
+    /var/tmp/* \
+    /root/.cache
 
 # Setup App
 WORKDIR /app
